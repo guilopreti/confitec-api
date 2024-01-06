@@ -1,0 +1,11 @@
+# Arquivos de configuração do Visual Studio Code
+.vscode/
+
+# Binário compilado
+bin/
+
+# Arquivos de compilação intermediários
+obj/
+
+# Configuração da aplicação
+appsettings.json

@@ -1,10 +1,19 @@
 using confitec.Persistence;
+using dotenv.net;
 using Microsoft.EntityFrameworkCore;
 
+DotEnv.Load();
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("UsersCs");
+var dbServer = Environment.GetEnvironmentVariable("DB_SERVER");
+var dbName = Environment.GetEnvironmentVariable("DB_NAME");
+var dbUser = Environment.GetEnvironmentVariable("DB_USER");
+var dbPassword = Environment.GetEnvironmentVariable("DB_PASSWORD");
+
+var connectionString = $"Server={dbServer}; Database={dbName}; User Id={dbUser}; Password={dbPassword}; trustServerCertificate=true";
+
+builder.Configuration["ConnectionStrings:UsersCs"] = connectionString;
 
 builder.Services.AddDbContext<UsersDbContext>(o => o.UseSqlServer(connectionString));
 
